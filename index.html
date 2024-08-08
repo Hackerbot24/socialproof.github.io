@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png"/>
+    <title>Social Proof Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+        :root {
+            --primary-color: #5B2C6F;
+            --secondary-color: #F3E5F5;
+            --text-color: #333;
+            --star-color: #FFA500;
+            --background-color: #f9f9f9;
+        }
+
+        .dark-mode {
+            --primary-color: #9B59B6;
+            --secondary-color: #34495E;
+            --text-color: #ECF0F1;
+            --star-color: #F1C40F;
+            --background-color: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .social-proof {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+
+        .ratings {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .rating {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .rating:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: var(--star-color);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: filter 0.3s ease;
+        }
+
+        .dark-mode .testimonial-header img {
+            filter: brightness(1.2);
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+        }
+
+        .testimonial-status {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 4rem;
+            transition: background-color 0.3s ease;
+        }
+
+        footer a {
+            color: yellowgreen;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .slider-controls {
+            display: none;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .slider-control {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .slider-control:hover {
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 768px) {
+            .ratings {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .rating {
+                flex: 1;
+            }
+
+            .testimonials {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .testimonial {
+                margin-bottom: 1rem;
+            }
+
+            .testimonials {
+                display: flex;
+                overflow-x: hidden;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .testimonial {
+                flex: 0 0 100%;
+                scroll-snap-align: start;
+            }
+
+            .slider-controls {
+                display: flex;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="social-proof">
+            <div class="header animate-fade-in">
+                <h1>10,000+ of our users love our products.</h1>
+                <p>We only provide great products combined with excellent customer service. See what our satisfied customers are saying about our services.</p>
+            </div>
+            <div class="ratings">
+                <div class="rating animate-slide-in" style="animation-delay: 0.1s;">
+                    <div class="stars">★★★★★</div>
+                    <p>Rated 5 Stars in Reviews</p>
+                </div>
+                <div class="rating animate-slide-in" style="animation-delay: 0.2s;">
+                    <div class="stars">★★★★★</div>
+                    <p>Rated 5 Stars in Report Guru</p>
+                </div>
+                <div class="rating animate-slide-in" style="animation-delay: 0.3s;">
+                    <div class="stars">★★★★★</div>
+                    <p>Rated 5 Stars in BestTech</p>
+                </div>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="testimonial-header">
+                        <img src="images\image-colton.jpg?random=1" alt="Colton Smith">
+                        <div>
+                            <div class="testimonial-name">Colton Smith</div>
+                            <div class="testimonial-status">Verified Buyer</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-content">"We needed the same printed design as the one we had ordered a week prior. Not only did they find the original order, but we also received it in time. Excellent!"</p>
+                </div>
+                <div class="testimonial animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="testimonial-header">
+                        <img src="images\image-irene.jpg?random=2" alt="Irene Roberts">
+                        <div>
+                            <div class="testimonial-name">Irene Roberts</div>
+                            <div class="testimonial-status">Verified Buyer</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-content">"Customer service is always excellent and very quick turn around. Completely delighted with the simplicity of the purchase and the speed of delivery."</p>
+                </div>
+                <div class="testimonial animate-fade-in" style="animation-delay: 0.6s;">
+                    <div class="testimonial-header">
+                        <img src="images\image-anne.jpg?random=3" alt="Anne Wallace">
+                        <div>
+                            <div class="testimonial-name">Anne Wallace</div>
+                            <div class="testimonial-status">Verified Buyer</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-content">"Put an order with this company and can only praise them for the very high standard. Will definitely use them again and recommend them to everyone!"</p>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-control" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-control" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+        <p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/Hackerbot24">Hackerbot24</a>.</p>
+    </footer>
+
+    <button class="dark-mode-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button>
+
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            darkModeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Testimonial slider for mobile
+        const testimonials = document.querySelector('.testimonials');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function showTestimonial(index) {
+            const testimonialWidth = testimonials.clientWidth;
+            testimonials.scrollTo({
+                left: index * testimonialWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + testimonials.children.length) % testimonials.children.length;
+            showTestimonial(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % testimonials.children.length;
+            showTestimonial(currentIndex);
+        });
+
+        // Intersection Observer for animations
+        const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.visibility = 'visible';
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => {
+            el.style.visibility = 'hidden';
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
